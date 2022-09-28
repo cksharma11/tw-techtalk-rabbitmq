@@ -6,10 +6,18 @@ import org.springframework.stereotype.Component
 @Component
 class RabbitReceiver {
 
-    @RabbitListener(queues = ["queue-1"])
-    fun directExchangeListener(message: String) {
+    @RabbitListener(queues = ["order.create.queue"])
+    fun orderCreateListener(message: String) {
         println("=========================")
-        println("message received on queue-1 - $message")
+        println("message received on consumer 1 - $message")
         println("=========================")
     }
+
+    @RabbitListener(queues = ["order.create.log.queue"])
+    fun orderCreateLogListener(message: String) {
+        println("=========================")
+        println("message received on consumer 2 - $message")
+        println("=========================")
+    }
+
 }
